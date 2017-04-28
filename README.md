@@ -2,11 +2,11 @@
 
 > 本脚本修改自:<https://github.com/jkpang/PPAutoPackageScript>,十分感谢该作者！
 
-## 注意：不能使用 ruby2.4.0 运行该脚本
+## 注意：不能使用 ruby 2.4.0 运行该脚本
 
 该脚本在最新的 `Ruby 2.4.0` 下运行会出错
 
-请先查看的自己ruby版本
+请先查看的自己 ruby 版本
 
 	$ ruby -v
 	
@@ -34,3 +34,21 @@
 最终会在桌面生成：
 
 ![](https://ww3.sinaimg.cn/large/006tNc79gy1ff27d438voj30f70avmyc.jpg)
+
+## 上传到 Fir
+
+添加了将ipa包上传到 [Fir](https://fir.im/) 的功能
+
+要使用fir的上传功能，需要安装fir的命令行工具
+
+	gem install fir-cli
+
+修改配置
+
+	is_fir="true"
+	fir_token="FirAPIToken"
+`FirAPIToken` 在[官网](https://fir.im/)获取
+
+![](https://ww4.sinaimg.cn/large/006tNc79gy1ff2878x1a8j304t07bt8r.jpg)
+
+这样，导出 ipa包 成功时，就能顺带上传到 fir 了。
