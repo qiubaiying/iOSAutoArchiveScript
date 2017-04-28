@@ -39,7 +39,7 @@ build_configuration="Release"
 # 需要先安装fir的命令行工具 
 # gem install fir-cli
 # 是否上传到fir，是true 否false
-is_fir="true"
+is_fir="false"
 # 在 fir 上的API Token
 fir_token="FirAPIToken"
 
