@@ -20,7 +20,10 @@
 # step3 : 打开终端, cd到iOSAutoArchiveScript文件夹 (ps:在终端中先输入cd ,直接拖入iOSAutoArchiveScript文件夹,回车)
 # step4 : 输入 sh iOSAutoArchiveScript.sh 命令,回车,开始执行此打包脚本
 
-# 计时
+# 若切换版本ruby版本还是编译失败，请使用系统的ruby版本
+# rvm use system
+
+# 编译时间统计
 SECONDS=0
 
 # ===============================项目自定义部分(自定义好下列参数后再执行该脚本)============================= #
@@ -162,6 +165,8 @@ echo "打包总用时: ${SECONDS}s ~~~~~~~~~~~~~~~~"
 if $is_fir ; then
 echo "**************************开始上传ipa文件....*********************************"
 fir publish "$export_ipa_path/$ipa_name.ipa" -T ${fir_token}
+echo "若上传失败，请切换回默认ruby版本 rvm use default"
+echo "fir publish "$export_ipa_path/$ipa_name.ipa" -T ${fir_token}"
 echo "总计用时:${SECONDS}"
 else
 exit 1
