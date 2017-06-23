@@ -2,25 +2,30 @@
 
 > 本脚本修改自:<https://github.com/jkpang/PPAutoPackageScript>,十分感谢该作者！
 
-## 注意：不能使用 ruby 2.4.0 运行该脚本
+~~## 注意：不能使用 ruby 2.4.0 运行该脚本~~
 
-该脚本在最新的 `Ruby 2.4.0` 下运行会出错
 
-请先查看的自己 ruby 版本
+该脚本在最新的 `Ruby 2.4.0` 下运行会出错（在 macOS 10.12.3 或是 10.12.4 下会编译失败，系统更新到 macOS 10.12.5 后，一切正常）
+
+
+
+若是编译错误（一般是在导出 .ipa 包这一步），请先切换旧的 Ruby 版本再进行编译,
+
+查看的自己 ruby 版本
 
 	$ ruby -v
 	
 	ruby 2.3.3p222
+	
+切换 ruby 版本
 
-若是 `2.4.0`，使用前请先切换旧的 Ruby 版本,
  如 `2.3.3`
-
 	$ rvm install 2.3.3 --disable-binary
 	$ rvm use 2.3.3 --default 
 
 ## 使用方法
 
-1. 切换 ruby 版本 `小于 2.4.0`
+1. ~~切换 ruby 版本 `小于 2.4.0`~~
 
 2. 将 **iOSAutoArchiveScript 文件夹** 拖入到项目 **主目录！**
 
@@ -52,3 +57,15 @@
 ![](https://ww4.sinaimg.cn/large/006tNc79gy1ff2878x1a8j304t07bt8r.jpg)
 
 这样，导出 ipa包 成功时，就能顺带上传到 fir 了。
+
+## 利用 自定义终端指令 简化打包过程
+
+以zsh为例:
+
+	open ~/.zshrc
+
+添加自定义命令 `cd + sh`
+
+	alias mybuild='cd 项目地址/iOSAutoArchiveScript/ &&  sh 项目地址/iOSAutoArchiveScript/iOSAutoArchiveScript.sh'
+	
+这样打开终端输入`mybuild`，就可以轻松实现一键打包上传了
