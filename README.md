@@ -20,6 +20,7 @@
 切换 ruby 版本
 
  如 `2.3.3`
+ 
 	$ rvm install 2.3.3 --disable-binary
 	$ rvm use 2.3.3 --default 
 
