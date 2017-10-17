@@ -2,7 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>method</key>
-	<string>ad-hoc</string>
+<!-- Xcode9 需要指定 provisioningProfiles 文件名 和 teamID -->
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>com.GreenLink.GreenLink-App</key>
+        <string>对应描述文件的名称</string>
+    </dict>
+    <key>compileBitcode</key>
+    <false/>
+    <key>method</key>
+    <string>ad-hoc</string>
+    <key>teamID</key>
+    <string>你的teamID</string>
 </dict>
 </plist>

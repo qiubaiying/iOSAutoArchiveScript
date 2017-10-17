@@ -14,37 +14,32 @@
 
 
 # 使用方法:
-# 切换ruby版本 小于2.4.0
 # step1 : 将iOSAutoArchiveScript整个文件夹拖入到项目主目录,项目主目录,项目主目录~~~(重要的事情说3遍!😊😊😊)
 # step2 : 打开iOSAutoArchiveScript.sh文件,修改 "项目自定义部分" 配置好项目参数
 # step3 : 打开终端, cd到iOSAutoArchiveScript文件夹 (ps:在终端中先输入cd ,直接拖入iOSAutoArchiveScript文件夹,回车)
 # step4 : 输入 sh iOSAutoArchiveScript.sh 命令,回车,开始执行此打包脚本
 
-# 若切换版本ruby版本还是编译失败，请使用系统的ruby版本
-# rvm use system
-
-# 编译时间统计
-SECONDS=0
-
 # ===============================项目自定义部分(自定义好下列参数后再执行该脚本)============================= #
+# 计时
+SECONDS=0
 # 是否编译工作空间 (例:若是用Cocopods管理的.xcworkspace项目,赋值true;用Xcode默认创建的.xcodeproj,赋值false)
 is_workspace="true"
 # 指定项目的scheme名称
 # (注意: 因为shell定义变量时,=号两边不能留空格,若scheme_name与info_plist_name有空格,脚本运行会失败,暂时还没有解决方法,知道的还请指教!)
-scheme_name="项目名称"
+scheme_name="you_scheme_name"
 # 工程中Target对应的配置plist文件名称, Xcode默认的配置文件为Info.plist
 info_plist_name="Info"
 # 指定要打包编译的方式 : Release,Debug，或者自定义的编译方式
-build_configuration="Release"
+build_configuration="AdHoc"
 
 # ===============================项目上传部分============================= #
 # 上传到fir <https://fir.im>，
 # 需要先安装fir的命令行工具 
 # gem install fir-cli
 # 是否上传到fir，是true 否false
-is_fir="false"
+is_fir="true"
 # 在 fir 上的API Token
-fir_token="FirAPIToken"
+fir_token="you_fir_Token"
 
 # ===============================自动打包部分(无特殊情况不用修改)============================= #
 
@@ -61,9 +56,9 @@ bundle_build_version=`/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" $Inf
 bundle_identifier=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" $InfoPlistPath`
 
 # 删除旧.xcarchive文件
-rm -rf ~/Desktop/$scheme_name-IPA/$scheme_name.xcarchive
+rm -rf ~/AutoArchive/$scheme_name-IPA/$scheme_name.xcarchive
 # 指定输出ipa路径
-export_path=~/Desktop/$scheme_name-IPA
+export_path=~/AutoArchive/$scheme_name-IPA
 # 指定输出归档文件地址
 export_archive_path="$export_path/$scheme_name.xcarchive"
 # 指定输出ipa地址
@@ -142,10 +137,13 @@ exit 1
 fi
 
 echo "**************************开始导出ipa文件....*********************************"
+# Xcode9需要加上 -allowProvisioningUpdates 
+# 详情看:https://github.com/fastlane/fastlane/issues/9589
 xcodebuild  -exportArchive \
             -archivePath ${export_archive_path} \
             -exportPath ${export_ipa_path} \
-            -exportOptionsPlist ${ExportOptionsPlistPath}
+            -exportOptionsPlist ${ExportOptionsPlistPath} \
+            -allowProvisioningUpdates
 # 修改ipa文件名称
 mv $export_ipa_path/$scheme_name.ipa $export_ipa_path/$ipa_name.ipa
 
@@ -165,7 +163,6 @@ echo "打包总用时: ${SECONDS}s ~~~~~~~~~~~~~~~~"
 if $is_fir ; then
 echo "**************************开始上传ipa文件....*********************************"
 fir publish "$export_ipa_path/$ipa_name.ipa" -T ${fir_token}
-echo "若上传失败，请切换回默认ruby版本 rvm use default"
 echo "fir publish "$export_ipa_path/$ipa_name.ipa" -T ${fir_token}"
 echo "总计用时:${SECONDS}"
 else

@@ -2,8 +2,30 @@
 
 > 本脚本修改自:<https://github.com/jkpang/PPAutoPackageScript>,十分感谢该作者！
 
-~~## 注意：不能使用 ruby 2.4.0 运行该脚本~~
+## 更新了 Xcode 9
 
+**现已经更新到 Xcode 9！**
+
+Xcode 9 的 xcodebuild 自动打包工具做了调整
+
+- Xcode 9 将不会允许你访问钥匙串里的内容，除非设置 `-allowProvisioningUpdates`。[详情请看](https://github.com/fastlane/fastlane/issues/9589)
+- `ExportOptions.plist` 需要添加新的 Key-Value:
+
+	```
+	<key>provisioningProfiles</key>
+		<dict>
+			<key>你的 Bundle ID</key>
+			<string>对应的PP描述文件的名称</string>
+		</dict>
+	<key>teamID</key>
+	<string>你的 teamID</string>
+	```
+
+
+## 注意
+
+
+~~## 注意：不能使用 ruby 2.4.0 运行该脚本~~
 
 该脚本在最新的 `Ruby 2.4.0` 下运行会出错（在 macOS 10.12.3 或是 10.12.4 下会编译失败，系统更新到 macOS 10.12.5 后，一切正常）
 
