@@ -4,6 +4,8 @@
 
 ## 更新了 Xcode 9
 
+> [Xcode 8版本点这](https://github.com/qiubaiying/iOSAutoArchiveScript/tree/xcode8)
+
 **现已经更新到 Xcode 9！**
 
 Xcode 9 的 xcodebuild 自动打包工具做了调整
@@ -92,3 +94,9 @@ Xcode 9 的 xcodebuild 自动打包工具做了调整
 	alias mybuild='cd 项目地址/iOSAutoArchiveScript/ &&  sh 项目地址/iOSAutoArchiveScript/iOSAutoArchiveScript.sh'
 	
 这样打开终端输入`mybuild`，就可以轻松实现一键打包上传了
+
+## LICENSE
+
+[MIT License](https://github.com/qiubaiying/iOSAutoArchiveScript/blob/master/LICENSE)
+
+
