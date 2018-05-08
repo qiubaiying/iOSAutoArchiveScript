@@ -55,10 +55,7 @@ bundle_version=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" $I
 bundle_build_version=`/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" $InfoPlistPath`
 bundle_identifier=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" $InfoPlistPath`
 
-# 删除旧.xcarchive文件
-rm -rf ~/AutoArchive/$scheme_name-IPA/$scheme_name.xcarchive
-# 删除旧.xcarchive文件
-rm -rf ~/AutoArchive/$scheme_name-IPA/$ipa_name.ipa
+
 # 指定输出ipa路径
 export_path=~/AutoArchive/$scheme_name-IPA
 # 指定输出归档文件地址
@@ -67,6 +64,7 @@ export_archive_path="$export_path/$scheme_name.xcarchive"
 export_ipa_path="$export_path"
 # 指定输出ipa名称 : scheme_name + bundle_version
 ipa_name="$scheme_name-v$bundle_version"
+
 
 # AdHoc,AppStore,Enterprise三种打包方式的区别: http://blog.csdn.net/lwjok2007/article/details/46379945
 echo "================请选择打包方式(输入序号,按回车即可)================"
@@ -97,6 +95,12 @@ then
     exit 1
     fi
 fi
+
+echo "**************************删除旧编译文件与ipa...*********************************"
+# 删除旧.xcarchive文件
+rm -rf ~/AutoArchive/$scheme_name-IPA/$scheme_name.xcarchive
+# 删除旧.xcarchive文件
+rm -rf ~/AutoArchive/$scheme_name-IPA/$ipa_name.ipa
 
 echo "**************************开始编译代码...*********************************"
 # 指定输出文件目录不存在则创建
