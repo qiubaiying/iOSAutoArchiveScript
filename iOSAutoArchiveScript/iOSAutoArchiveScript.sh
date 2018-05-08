@@ -57,6 +57,8 @@ bundle_identifier=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" $InfoPlist
 
 # 删除旧.xcarchive文件
 rm -rf ~/AutoArchive/$scheme_name-IPA/$scheme_name.xcarchive
+# 删除旧.xcarchive文件
+rm -rf ~/AutoArchive/$scheme_name-IPA/$ipa_name.ipa
 # 指定输出ipa路径
 export_path=~/AutoArchive/$scheme_name-IPA
 # 指定输出归档文件地址
